@@ -13,7 +13,7 @@ import com.example.todo.domain.model.Todo;
 public class TodoRepositoryImpl implements TodoRepository {
 
 	private static final Map<String, Todo> TODO_MAP = new ConcurrentHashMap<String, Todo>();
-
+	
     @Override
     public Optional<Todo> findById(String todoId) {
         return Optional.ofNullable(TODO_MAP.get(todoId));
