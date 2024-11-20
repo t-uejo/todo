@@ -12,8 +12,25 @@
   <body>
     <h1>Todo List</h1>
     <div id="todoForm">
-      <form action="/todo/create" method="post">
-        <input type="text" />
+      <div
+        th:if="${resultMessages} != null"
+        class="alert alert-success"
+        th:class="|alert alert-${resultMessages.type}|"
+      >
+        <ul>
+          <li th:each="message : ${resultMessages}" th:text="${message.text}">
+            Created successfully!
+          </li>
+        </ul>
+      </div>
+      <form action="/todo/create" th:action="@{/todo/create}" method="post">
+        <input type="text" th:field="${todoForm.todoTitle}" />
+        <span
+          id="todoTitle.errors"
+          th:errors="${todoForm.todoTitle}"
+          class="text-error"
+          >size must be between 1 and 30</span
+        >
         <button>Create Todo</button>
       </form>
     </div>
