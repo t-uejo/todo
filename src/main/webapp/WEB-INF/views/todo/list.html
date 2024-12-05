@@ -23,7 +23,10 @@
           </li>
         </ul>
       </div>
-      <form action="/todo/create" th:action="@{/todo/create}" method="post">
+      <form
+	  	action="/todo/create"
+		th:action="@{/todo/create}"
+		method="post">
         <input type="text" th:field="${todoForm.todoTitle}" />
         <span
           id="todoTitle.errors"
@@ -46,26 +49,13 @@
           <form
             th:if="${!todo.finished}"
             action="/todo/finish"
+			th:action="@{/todo/finish}"
             method="post"
             class="inline"
           >
+		  	<input type="hidden" name="todoId" th:value="${todo.todoId}" />
             <button>Finish</button>
           </form>
-          <form action="/todo/delete" method="post" class="inline">
-            <button>Delete</button>
-          </form>
-        </li>
-        <li>
-          <span>Have a lunch</span>
-          <form action="/todo/finish" method="post" class="inline">
-            <button>Finish</button>
-          </form>
-          <form action="/todo/delete" method="post" class="inline">
-            <button>Delete</button>
-          </form>
-        </li>
-        <li>
-          <span class="strike">Read a book</span>
           <form action="/todo/delete" method="post" class="inline">
             <button>Delete</button>
           </form>
