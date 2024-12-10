@@ -6,10 +6,25 @@
 </head>
 <body>
     <h1>タスク一覧</h1>
-    <p th:text="${task.id}"></p>
-    <p th:text="${task.summary}"></p>
-    <p th:text="${task.description}"></p>
-    <p th:text="${task.status}"></p>
     <a th:href="@{/}">トップページへ戻る</a>
+
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>概要</th>
+                    <th>ステータス</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td th:text="${task.id}"></td>
+                    <td th:text="${task.summary}"></td>
+                    <td th:text="${task.status}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>
