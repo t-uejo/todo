@@ -1,13 +1,12 @@
 spring:
   application:
     name: todo
+  logging:
+    level:
+      org:
+        flywaydb: DEBUG
   datasource:
-    url: jdbc:postgresql://localhost:5432/todo
+    url: jdbc:postgresql://localhost:5433/todo
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
-  flyway:
-    url: jdbc:postgresql://localhost:5432/todo
-    user: postgres
-    password: postgres
-    locations: classpath:db/migration

@@ -109,10 +109,6 @@
 					<url>jdbc:postgresql://localhost:5433/todo</url>
 					<user>postgres</user>
 					<password>postgres</password>
-					<schemas>public</schemas>
-					<locations>
-						classpath:db/migration
-					</locations>
 				</configuration>
 			</plugin>
 		</plugins>
