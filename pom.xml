@@ -48,6 +48,14 @@
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-database-postgresql</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>org.postgresql</groupId>
@@ -91,6 +99,20 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.flywaydb</groupId>
+				<artifactId>flyway-maven-plugin</artifactId>
+				<version>11.0.1</version>
+				<configuration>
+					<url>jdbc:postgresql://localhost:5433/todo</url>
+					<user>postgres</user>
+					<password>postgres</password>
+					<schemas>public</schemas>
+					<locations>
+						classpath:db/migration
+					</locations>
 				</configuration>
 			</plugin>
 		</plugins>
