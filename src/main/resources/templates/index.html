@@ -2,10 +2,13 @@
 <html lang="ja" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TODOアプリ</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
 </head>
 <body>
-    <h1>Hello, world! from Thymeleaf</h1>
+    <h1>TODOアプリ</h1>
     <a th:href="@{/tasks}" href="/tasks">タスク一覧</a>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </body>
 </html>
