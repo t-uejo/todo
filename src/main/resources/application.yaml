@@ -3,8 +3,6 @@ spring:
     name: todo
   logging:
     level:
-      org:
-        flywaydb: DEBUG
   datasource:
     url: jdbc:postgresql://localhost:5433/todo
     username: postgres
