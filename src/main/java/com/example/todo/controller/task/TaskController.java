@@ -15,7 +15,7 @@ public class TaskController {
 
     @GetMapping("/tasks")
     public String list(Model model){
-        var taskList = taskService.find()
+        var taskList = taskService.findAll()
                 .stream()
                 .map(TaskForm::toForm)
                 .toList();
@@ -26,7 +26,8 @@ public class TaskController {
 
     @GetMapping("/tasks/{id}")
     public String showDetail(@PathVariable("id") long taskId, Model model) {
-        model.addAttribute("taskId", taskId);
+        var taskEntity = taskService.findById(taskId);
+        model.addAttribute("task" ,TaskForm.toForm(taskEntity));
         return "tasks/detail";
     }
 }

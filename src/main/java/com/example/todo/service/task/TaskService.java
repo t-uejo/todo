@@ -12,8 +12,12 @@ public class TaskService {
 
     private final TaskRepository taskRepository;
 
-    public List<TaskEntity> find(){
+    public List<TaskEntity> findAll(){
         return taskRepository.select();
     }
 
+    public TaskEntity findById(long taskId) {
+        return taskRepository.selectById(taskId)
+                .orElseThrow(() -> new IllegalArgumentException("Task not found: id = " + taskId));
+    }
 }
