@@ -11,26 +11,26 @@
 <section layout:fragment="content">
     <div class="container">
         <form th:action="@{/tasks}" method="post" th:object="${taskForm}">
-            <div>
-                <label for="summaryInput">概要</label>
-                <input type="text" id="summaryInput" th:field="*{summary}">
+            <div class="form-group">
+                <label for="summaryInput" class="form-label">概要</label>
+                <input type="text" id="summaryInput" th:field="*{summary}" class="form-control">
                 <span th:errors="*{summary}"></span>
             </div>
-            <div>
-                <label for="descriptionInput">詳細</label>
-                <textarea id="descriptionInput" th:field="*{description}"></textarea>
+            <div class="form-group mt-3">
+                <label for="descriptionInput" class="form-label">詳細</label>
+                <textarea id="descriptionInput" th:field="*{description}" rows=10 class="form-control"></textarea>
             </div>
-            <div>
-                <label for="statusInput">ステータス</label>
-                <select id="statusInput" th:field="*{status}">
+            <div class="form-group mt-3">
+                <label for="statusInput" class="form-label">ステータス</label>
+                <select id="statusInput" th:field="*{status}" class="form-control">
                     <option value="TODO">Todo</option>
                     <option value="DOING">Doing</option>
                     <option value="DONE">Done</option>
                 </select>
                 <span th:errors="*{status}"></span>
             </div>
-            <div>
-                <button type="submit">作成</button>
+            <div class="mt-5">
+                <button type="submit" class="btn btn-primary">作成</button>
             </div>
         </form>
     </div>
