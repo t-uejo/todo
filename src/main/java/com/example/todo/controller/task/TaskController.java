@@ -19,7 +19,7 @@ public class TaskController {
     public String list(Model model){
         var taskList = taskService.findAll()
                 .stream()
-                .map(TaskDTO::toDTO)
+                .map(TaskDTO::fromEntity)
                 .toList();
 
         model.addAttribute("taskList", taskList);
@@ -29,7 +29,7 @@ public class TaskController {
     @GetMapping("/{id}")
     public String showDetail(@PathVariable("id") long taskId, Model model) {
         var taskEntity = taskService.findById(taskId);
-        model.addAttribute("task" , TaskDTO.toDTO(taskEntity));
+        model.addAttribute("task" , TaskDTO.fromEntity(taskEntity));
         return "tasks/detail";
     }
 
