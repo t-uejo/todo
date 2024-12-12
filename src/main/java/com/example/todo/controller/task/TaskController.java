@@ -57,6 +57,22 @@ public class TaskController {
         model.addAttribute("taskForm" , TaskForm.fromEntity(taskEntity));
         return "tasks/form";
     }
+
+    @PutMapping("{id}")
+    public String update(
+            @PathVariable("id") long id,
+            @Validated @ModelAttribute TaskForm form,
+            BindingResult bindingResult,
+            Model model
+    ){
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("mode", EDIT_MODE);
+            return "tasks/form";
+        }
+
+        taskService.update(form.toEntity(id));
+        return "redirect:/tasks/{id}";
+    }
 }
 
 

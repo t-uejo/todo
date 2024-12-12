@@ -2,6 +2,11 @@ spring:
   application:
     name: todo
 
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+
   datasource:
     url: jdbc:postgresql://localhost:5433/todo
     username: postgres
