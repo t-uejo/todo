@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 public class TaskController {
 
     private final TaskService taskService;
+    private final String CREATE_MODE = "CREATE";
+    private final String EDIT_MODE = "EDIT";
 
     @GetMapping
     public String list(Model model){
@@ -34,14 +36,15 @@ public class TaskController {
     }
 
     @GetMapping("/creationForm")
-    public String showCreationForm(@ModelAttribute TaskForm form){
+    public String showCreationForm(@ModelAttribute TaskForm form, Model model){
+        model.addAttribute("mode", CREATE_MODE);
         return "tasks/form";
     }
 
     @PostMapping
-    public String create(@Validated TaskForm form, BindingResult bindingResult){
+    public String create(@Validated TaskForm form, BindingResult bindingResult, Model model){
         if (bindingResult.hasErrors()) {
-            return showCreationForm(form);
+            return showCreationForm(form, model);
         }
         taskService.create(form.toEntity());
         return "redirect:/tasks";
@@ -49,6 +52,7 @@ public class TaskController {
 
     @GetMapping("/{id}/editForm")
     public String showEditForm(@PathVariable("id") long taskId, Model model){
+        model.addAttribute("mode", EDIT_MODE);
         var taskEntity = taskService.findById(taskId);
         model.addAttribute("taskForm" , TaskForm.fromEntity(taskEntity));
         return "tasks/form";
