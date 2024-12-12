@@ -51,9 +51,9 @@ public class TaskController {
     }
 
     @GetMapping("/{id}/editForm")
-    public String showEditForm(@PathVariable("id") long taskId, Model model){
+    public String showEditForm(@PathVariable("id") long id, Model model){
         model.addAttribute("mode", EDIT_MODE);
-        var taskEntity = taskService.findById(taskId);
+        var taskEntity = taskService.findById(id);
         model.addAttribute("taskForm" , TaskForm.fromEntity(taskEntity));
         return "tasks/form";
     }
@@ -72,6 +72,12 @@ public class TaskController {
 
         taskService.update(form.toEntity(id));
         return "redirect:/tasks/{id}";
+    }
+
+    @DeleteMapping("{id}")
+    public String delete(@PathVariable("id") long id){
+        taskService.delete(id);
+        return "redirect:/tasks";
     }
 }
 

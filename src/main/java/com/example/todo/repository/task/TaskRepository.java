@@ -26,7 +26,7 @@ public interface TaskRepository {
     @Update(
         """
         UPDATE tasks
-        SET
+        SET 
             summary = #{task.summary},
             description =  #{task.description},
             status =  #{task.status}
@@ -34,4 +34,7 @@ public interface TaskRepository {
             id = #{task.id}
         """)
     void update(@Param("task") TaskEntity taskEntity);
+
+    @Delete("DELETE FROM tasks WHERE id = #{taskId}")
+    void delete(@Param("taskId") long id);
 }
