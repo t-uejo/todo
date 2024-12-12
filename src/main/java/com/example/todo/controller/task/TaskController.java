@@ -1,6 +1,8 @@
 package com.example.todo.controller.task;
 
+import com.example.todo.service.task.TaskEntity;
 import com.example.todo.service.task.TaskService;
+import com.example.todo.service.task.TaskStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +20,7 @@ public class TaskController {
     public String list(Model model){
         var taskList = taskService.findAll()
                 .stream()
-                .map(TaskForm::toForm)
+                .map(TaskDTO::toDTO)
                 .toList();
 
         model.addAttribute("taskList", taskList);
@@ -28,7 +30,7 @@ public class TaskController {
     @GetMapping("/tasks/{id}")
     public String showDetail(@PathVariable("id") long taskId, Model model) {
         var taskEntity = taskService.findById(taskId);
-        model.addAttribute("task" ,TaskForm.toForm(taskEntity));
+        model.addAttribute("task" , TaskDTO.toDTO(taskEntity));
         return "tasks/detail";
     }
 
@@ -38,7 +40,13 @@ public class TaskController {
     }
 
     @PostMapping("/tasks")
-    public String create(Model model){
+    public String create(TaskForm form ,Model model){
+        taskService.create(new TaskEntity(
+                null,
+                form.summary(),
+                form.description(),
+                TaskStatus.valueOf(form.status())
+        ));
         return list(model);
     }
 }

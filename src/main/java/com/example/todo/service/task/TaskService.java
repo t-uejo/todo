@@ -22,4 +22,8 @@ public class TaskService {
         return taskRepository.selectById(taskId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Task not found: id = " + taskId));
     }
+
+    public void create(TaskEntity taskEntity) {
+        taskRepository.inert(taskEntity);
+    }
 }
