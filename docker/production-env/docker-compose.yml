@@ -1,0 +1,27 @@
+services:
+
+  tomcat-production:
+    image: tomcat:latest
+    container_name: tomcat_production
+    ports:
+      - "8092:8080" # 本番環境用
+    environment:
+      - TZ=Asia/Tokyo
+    volumes:
+      - ./production_webapps:/usr/local/tomcat/webapps # 本番用Webアプリをマウント
+    restart: always
+
+  postgres-production:
+    image: postgres:latest
+    container_name: postgres-production
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: todo
+    ports:
+      - "5435:5432" # 本番環境用
+    volumes:
+      - postgres_production_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_production_data:

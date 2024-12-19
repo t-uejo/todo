@@ -1,0 +1,27 @@
+services:
+
+  tomcat-staging:
+    image: tomcat:latest
+    container_name: tomcat_staging
+    ports:
+      - "8091:8080" # 検証環境用
+    environment:
+      - TZ=Asia/Tokyo
+    volumes:
+      - ./staging_webapps:/usr/local/tomcat/webapps # 検証用Webアプリをマウント
+    restart: always
+
+  postgres-staging:
+    image: postgres:latest
+    container_name: postgres-staging
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: todo
+    ports:
+      - "5434:5432" # 検証環境用
+    volumes:
+      - postgres_staging_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_staging_data:

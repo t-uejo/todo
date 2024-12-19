@@ -1,0 +1,57 @@
+services:
+  jenkins:
+    image: jenkins/jenkins:lts
+    container_name: jenkins
+    ports:
+      - "8181:8080"
+      - "50000:50000" # Jenkinsエージェント接続用
+    volumes:
+      - jenkins_home:/var/jenkins_home
+    environment:
+      JAVA_OPTS: "-Djenkins.install.runSetupWizard=false"
+
+  # sonarqube:
+  #   image: sonarqube:latest
+  #   container_name: sonarqube
+  #   ports:
+  #     - "9000:9000"
+  #   volumes:
+  #     - sonarqube_data:/opt/sonarqube/data
+  #     - sonarqube_logs:/opt/sonarqube/logs
+  #     - sonarqube_extensions:/opt/sonarqube/extensions
+  #   environment:
+  #     SONAR_JDBC_URL: jdbc:postgresql://db:5432/sonar
+  #     SONAR_JDBC_USERNAME: sonar
+  #     SONAR_JDBC_PASSWORD: sonar
+  #   depends_on:
+  #     - db
+  #   networks:
+  #     - dev-net
+
+  # db:
+  #   image: postgres:latest
+  #   container_name: sonarqube-db
+  #   environment:
+  #     POSTGRES_USER: sonar
+  #     POSTGRES_PASSWORD: sonar
+  #     POSTGRES_DB: sonar
+  #   volumes:
+  #     - db_data:/var/lib/postgresql/data
+  #   networks:
+  #     - dev-net
+
+  nexus:
+    image: sonatype/nexus3:latest
+    container_name: nexus
+    ports:
+      - "8191:8081"
+    volumes:
+      - nexus_data:/nexus-data
+
+volumes:
+  jenkins_home:
+  # sonarqube_data:
+  # sonarqube_logs:
+  # sonarqube_extensions:
+  # db_data:
+  nexus_data:

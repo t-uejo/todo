@@ -1,0 +1,16 @@
+services:
+
+  postgres-develop:
+    image: postgres:latest
+    container_name: postgres-develop
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: todo
+    ports:
+      - "5433:5432" # 開発環境用
+    volumes:
+      - postgres_develop_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_develop_data:

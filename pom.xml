@@ -103,13 +103,26 @@
 	<profiles>
 		<profile>
 			<id>staging</id>
+<!--			<build>-->
+<!--				<resources>-->
+<!--					<resource>-->
+<!--						<directory>env/staging</directory>-->
+<!--					</resource>-->
+<!--					<resource>-->
+<!--						<directory>src/main/resources</directory>-->
+<!--					</resource>-->
+<!--				</resources>-->
+<!--			</build>-->
 			<build>
 				<resources>
 					<resource>
-						<directory>env/staging</directory>
+						<directory>src/main/resources</directory>
 					</resource>
 					<resource>
-						<directory>src/main/resources</directory>
+						<directory>env/staging</directory>
+						<includes>
+							<include>application.yaml</include>
+						</includes>
 					</resource>
 				</resources>
 			</build>
