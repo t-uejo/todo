@@ -16,3 +16,6 @@ spring:
 logging:
   level:
     com.example.todo.repository: DEBUG
+    org:
+      springframework:
+        web=DEBUG:
