@@ -8,11 +8,11 @@ spring:
         enabled: true
 
   datasource:
-    url: jdbc:postgresql://localhost:5433/todo
+    url: jdbc:postgresql://localhost:5435/todo
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
 
-logging:
-  level:
-    com.example.todo.repository: DEBUG
+server:
+  servlet:
+    context-path: /todo
