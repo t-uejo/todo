@@ -40,10 +40,10 @@ mvn flyway:migrate
 
 ### 検証環境
 ```
-mvn package -Pstaging spring-boot:repackage
+mvn package -Pstaging spring-boot:repackage -DskipTests
 ```
 
 ### 検証環境
 ```
-mvn package -Pproduction spring-boot:repackage
+mvn package -Pproduction spring-boot:repackage -DskipTests
 ```

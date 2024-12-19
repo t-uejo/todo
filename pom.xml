@@ -103,16 +103,6 @@
 	<profiles>
 		<profile>
 			<id>staging</id>
-<!--			<build>-->
-<!--				<resources>-->
-<!--					<resource>-->
-<!--						<directory>env/staging</directory>-->
-<!--					</resource>-->
-<!--					<resource>-->
-<!--						<directory>src/main/resources</directory>-->
-<!--					</resource>-->
-<!--				</resources>-->
-<!--			</build>-->
 			<build>
 				<resources>
 					<resource>
@@ -133,10 +123,13 @@
 			<build>
 				<resources>
 					<resource>
-						<directory>env/production</directory>
+						<directory>src/main/resources</directory>
 					</resource>
 					<resource>
-						<directory>src/main/resources</directory>
+						<directory>env/production</directory>
+						<includes>
+							<include>application.yaml</include>
+						</includes>
 					</resource>
 				</resources>
 			</build>
@@ -144,6 +137,7 @@
 	</profiles>
 
 	<build>
+		<finalName>todo</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
