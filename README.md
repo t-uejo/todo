@@ -29,6 +29,12 @@ docker compose up -d
     - コンテナ名：postgres-production
     - ポート番号：5435
  
+### テーブル作成
+以下のコマンドを実行し、テーブルを作成する。
+```
+mvn flyway:migrate
+```
+ 
 ## warファイル生成
 環境ごとにビルドし、warファイルを生成することができる。
 
