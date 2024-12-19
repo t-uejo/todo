@@ -8,6 +8,7 @@ spring:
         enabled: true
 
   datasource:
+#    url: jdbc:postgresql://localhost:5434/todo
     url: jdbc:postgresql://postgres-staging:5434/todo
     username: postgres
     password: postgres
