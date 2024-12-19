@@ -2,6 +2,9 @@ spring:
   application:
     name: todo
 
+#  flyway:
+#    enabled: false
+
   mvc:
     hiddenmethod:
       filter:
@@ -16,6 +19,4 @@ spring:
 logging:
   level:
     com.example.todo.repository: DEBUG
-    org:
-      springframework:
-        web=DEBUG:
+    org.springframework.web: DEBUG

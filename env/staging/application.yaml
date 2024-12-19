@@ -1,6 +1,9 @@
 spring:
   application:
     name: todo
+#
+#  flyway:
+#    enabled: false
 
   mvc:
     hiddenmethod:
@@ -8,13 +11,11 @@ spring:
         enabled: true
 
   datasource:
-    url: jdbc:postgresql://postgres-staging:5432/todo
+    url: jdbc:postgresql://postgres-staging:5434/todo
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
 
 logging:
   level:
-    org:
-      springframework:
-        web=DEBUG:
+    org.springframework.web: DEBUG

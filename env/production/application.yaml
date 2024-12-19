@@ -1,6 +1,9 @@
 spring:
   application:
     name: todo
+#
+#  flyway:
+#    enabled: false
 
   mvc:
     hiddenmethod:
