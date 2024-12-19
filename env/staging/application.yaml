@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: todo
+
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+
+  datasource:
+    url: jdbc:postgresql://localhost:5434/todo
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
