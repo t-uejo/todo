@@ -106,13 +106,16 @@
 			<build>
 				<resources>
 					<resource>
-						<directory>src/main/resources</directory>
-					</resource>
-					<resource>
 						<directory>env/staging</directory>
 						<includes>
 							<include>application.yaml</include>
 						</includes>
+					</resource>
+					<resource>
+						<directory>src/main/resources</directory>
+						<excludes>
+							<exclude>db/migration/*.sql</exclude>
+						</excludes>
 					</resource>
 				</resources>
 			</build>
@@ -123,13 +126,16 @@
 			<build>
 				<resources>
 					<resource>
-						<directory>src/main/resources</directory>
-					</resource>
-					<resource>
 						<directory>env/production</directory>
 						<includes>
 							<include>application.yaml</include>
 						</includes>
+					</resource>
+					<resource>
+						<directory>src/main/resources</directory>
+						<excludes>
+							<exclude>db/migration/*.sql</exclude>
+						</excludes>
 					</resource>
 				</resources>
 			</build>
