@@ -11,7 +11,7 @@ spring:
         enabled: true
 
   datasource:
-    url: jdbc:postgresql://postgres-production:5435/todo
+    url: jdbc:postgresql://postgres-production:5432/todo
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
