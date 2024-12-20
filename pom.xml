@@ -115,6 +115,7 @@
 						<directory>src/main/resources</directory>
 						<excludes>
 							<exclude>db/migration/*.sql</exclude>
+							<exclude>application.yaml</exclude>
 						</excludes>
 					</resource>
 				</resources>
@@ -135,6 +136,7 @@
 						<directory>src/main/resources</directory>
 						<excludes>
 							<exclude>db/migration/*.sql</exclude>
+							<exclude>application.yaml</exclude>
 						</excludes>
 					</resource>
 				</resources>
@@ -179,6 +181,38 @@
 					<password>postgres</password>
 				</configuration>
 			</plugin>
+<!--			<plugin>-->
+<!--				<groupId>org.apache.maven.plugins</groupId>-->
+<!--				<artifactId>maven-resources-plugin</artifactId>-->
+<!--				<version>3.3.1</version>-->
+<!--				<executions>-->
+<!--					&lt;!&ndash; `process-resources` フェーズでリソースをコピー &ndash;&gt;-->
+<!--					<execution>-->
+<!--						<phase>process-resources</phase>-->
+<!--						<goals>-->
+<!--							<goal>copy-resources</goal>-->
+<!--						</goals>-->
+<!--						<configuration>-->
+<!--							<overwrite>true</overwrite> &lt;!&ndash; 上書き設定 &ndash;&gt;-->
+<!--							<resources>-->
+<!--								<resource>-->
+<!--									<directory>env/staging</directory>-->
+<!--									<includes>-->
+<!--										<include>application.yaml</include> &lt;!&ndash; 上書き対象のファイル &ndash;&gt;-->
+<!--									</includes>-->
+<!--								</resource>-->
+<!--								<resource>-->
+<!--									<directory>env/production</directory>-->
+<!--									<includes>-->
+<!--										<include>application.yaml</include> &lt;!&ndash; 上書き対象のファイル &ndash;&gt;-->
+<!--									</includes>-->
+<!--								</resource>-->
+<!--							</resources>-->
+<!--							<outputDirectory>${project.build.directory}/classes</outputDirectory> &lt;!&ndash; 出力先 &ndash;&gt;-->
+<!--						</configuration>-->
+<!--					</execution>-->
+<!--				</executions>-->
+<!--			</plugin>-->
 		</plugins>
 	</build>
 
