@@ -73,10 +73,10 @@ mvn flyway:migrate
 
 ### 検証環境
 ```
-mvn package -Pstaging
+mvn clean package -Pstaging
 ```
 
 ### 本番環境
 ```
-mvn package -Pproduction
+mvn clean package -Pproduction
 ```
