@@ -56,10 +56,10 @@ docker compose up -d
 #### Web
 |コンテナ名|ホストポート:コンテナポート|環境| 
 | ---------- | -------- | ---- | 
-|tomcat-staging|`5433`:`8080`|検証| 
-|tomcat-production|`5434`:`8080`|本番| 
-|jenkins|`5435`:`8080`|CI| 
-|nexus|`5435`:`8080`|CI| 
+|tomcat-staging|`8091`:`8080`|検証| 
+|tomcat-production|`8092`:`8080`|本番| 
+|jenkins|`8181`:`8080`|CI| 
+|nexus|`8191`:`8081`|CI| 
  
 ## DB環境構築
 以下のコマンドを実行し、テーブルを作成する。
