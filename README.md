@@ -44,16 +44,16 @@ docker
 docker compose up -d
 ```
 
-### ポート一覧
+## 割り当てポート一覧
 
-#### PostgresSQL
+### PostgresSQL
 |コンテナ名|ホストポート:コンテナポート|環境| 
 | ---------- | -------- | ---- | 
 |postgres-develop|`5433`:`5432`|開発| 
 |postgres-staging|`5434`:`5432`|検証| 
 |postgres-production|`5435`:`5432`|本番| 
 
-#### Web
+### Web
 |コンテナ名|ホストポート:コンテナポート|環境| 
 | ---------- | -------- | ---- | 
 |tomcat-staging|`8091`:`8080`|検証| 
