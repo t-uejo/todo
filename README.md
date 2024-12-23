@@ -123,7 +123,7 @@ mvn release:perform
 
 
 ### 2. APサーバ（Tomcat）にデプロイ
-warファイルのデプロイ先はTomcatコンテナのwebappsであるが、以下のフォルダにマウントしているため配置することでデプロイ可能。
+warファイルのデプロイ先はTomcatコンテナのwebappsであるが、以下のフォルダとTomcatコンテナのwebappsをマウントしているため配置するだけでデプロイ可能である。
 
 ```
 docker
