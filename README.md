@@ -111,6 +111,7 @@ mvn release:perform
 ```
 
 > [!IMPORTANT]
+> - 事前に`<scm>`タグでGitリポジトリの設定を行うこと。
 > - deployゴールでNexusへアップロードするには、ローカルリポジトリである`.m2`フォルダ内にsettings.xmlを作成し設定を行う必要がある。
 > - `mvn release:perform`を使用すると`deploy`と`site-deploy`がゴールとして実行される。production用のプロファイルを指定してビルドし、warファイルを生成する必要がある。
 > - 設定方法はmaven-release-pluginの[releaseProfiles](https://maven.apache.org/maven-release/maven-release-plugin/usage/perform-release.html#perform-a-release)を参照すること。
