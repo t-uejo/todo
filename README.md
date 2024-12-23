@@ -1,7 +1,10 @@
 # タスク管理アプリケーション
 本アプリケーションは簡易的なCRUD操作ができるWebアプリケーションであり、主にSpring Bootを利用したバックエンド開発の基本的な実装を学ぶことを目的とした。
 
-さらに、Spring Bootを使用したアプリケーションのCI/CD環境構築に関する練習も含めており、開発からデプロイまでの一連のワークフローを実践した。
+さらに、Spring Bootを使用したアプリケーションのCI環境構築に関する練習も含めており、開発からデプロイまでの一連のワークフローを実践した。
+
+本ドキュメントは環境構築からデプロイまでの簡単な手順を示しているが、Jenkinsの設定などCI環境の構築手順については触れていない。<br>
+また、デプロイフローは[3.5. 開発プロジェクトのビルド - TERASOLUNA Server Framework for Java (5.x) Development Guideline](https://terasolunaorg.github.io/guideline/current/ja/ImplementationAtEachLayer/CreateProject.html#createwebapplicationprojectbuilddeploycontinueddeployment)を参考としているが、現時点でこのフローを自動化するには至っていない。今後の課題として取り組みたい。
 
 ## 技術スタック
 <img alt="my skills" src="https://skillicons.dev/icons?theme=light&perline=8&i=java,spring,idea,maven,jenkins,docker,postgres" />
