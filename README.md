@@ -16,7 +16,7 @@
 - Logback
 - JUnit / Mockito
 - Docker
-- Tomat
+- Tomat: `10`
 - Jenkins
 - Nexus
 - SonarQube
