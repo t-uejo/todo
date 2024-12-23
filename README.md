@@ -1,7 +1,10 @@
 # タスク管理アプリケーション
 本アプリケーションは簡易的なCRUD操作ができるWebアプリケーションであり、主にSpring Bootを利用したバックエンド開発の基本的な実装を学ぶことを目的とした。
 
-さらに、Spring Bootを使用したアプリケーションのCI/CD環境構築に関する練習も含めており、開発からデプロイまでの一連のワークフローを実践した。
+さらに、Spring Bootを使用したアプリケーションのCI環境構築に関する練習も含めており、開発からデプロイまでの一連のワークフローを実践した。
+
+本ドキュメントは環境構築からデプロイまでの簡単な手順を示しているが、Jenkinsの設定などCI環境の構築手順については触れていない。<br>
+また、デプロイフローは[3.5. 開発プロジェクトのビルド - TERASOLUNA Server Framework for Java (5.x) Development Guideline](https://terasolunaorg.github.io/guideline/current/ja/ImplementationAtEachLayer/CreateProject.html#createwebapplicationprojectbuilddeploycontinueddeployment)を参考としているが、現時点でこのフローを自動化するには至っていない。今後の課題として取り組みたい。
 
 ## 技術スタック
 <img alt="my skills" src="https://skillicons.dev/icons?theme=light&perline=8&i=java,spring,idea,maven,jenkins,docker,postgres" />
@@ -44,16 +47,16 @@ docker
 docker compose up -d
 ```
 
-### ポート一覧
+## 割り当てポート一覧
 
-#### PostgresSQL
+### PostgresSQL
 |コンテナ名|ホストポート:コンテナポート|環境| 
 | ---------- | -------- | ---- | 
 |postgres-develop|`5433`:`5432`|開発| 
 |postgres-staging|`5434`:`5432`|検証| 
 |postgres-production|`5435`:`5432`|本番| 
 
-#### Web
+### Web
 |コンテナ名|ホストポート:コンテナポート|環境| 
 | ---------- | -------- | ---- | 
 |tomcat-staging|`8091`:`8080`|検証| 
@@ -80,3 +83,19 @@ mvn clean package -Pstaging
 ```
 mvn clean package -Pproduction
 ```
+
+## デプロイ方法
+warファイルのデプロイ先は、Tomcatコンテナのwebappsであるが、以下のフォルダにマウントしているため配置することでデプロイ可能。
+
+```
+docker
+  ├── staging-env
+  │   └── production_webapps
+  └── production-env
+      └── staging_webapps
+```
+
+- 検証環境確認URL：http://localhost:8091/todo/
+- 本番環境確認URL：http://localhost:8092/todo/
+
+
