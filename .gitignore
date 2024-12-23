@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Docker ###
+/docker/production-env/production_webapps
+/docker/staging-env/staging_webapps
