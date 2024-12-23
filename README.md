@@ -24,21 +24,15 @@
 ## Dockerコンテナ環境
 ```
 docker
-  ├── develop-env
+  ├── develop-env                     //開発環境（PostgresSQL）
   │   └── docker-compose.yaml
-  ├── staging-env
+  ├── staging-env                     //検証環境（Tomcat, PostgresSQL）
   │   └── docker-compose.yaml
-  └── production-env
+  └── production-env                  //本番環境（Tomcat, PostgresSQL）
   │   └── docker-compose.yaml
-  └── ci-env
+  └── ci-env                          //CI環境（Jenkins, SonarQube, Nexus）             
       └── docker-compose.yaml
 ```
-
-### 詳細
-- develop-env：開発環境（PostgresSQL）
-- staging-env：検証環境（Tomcat, PostgresSQL）
-- production-env：本番環境（Tomcat, PostgresSQL）
-- ci-env：CI環境（Jenkins, SonarQube, Nexus）
 
 ### 構築手順
 それぞれのフォルダへ移動し、docker composeコマンドを実行する。
