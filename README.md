@@ -4,7 +4,6 @@
 さらに、Spring Bootを使用したアプリケーションのCI環境構築に関する練習も含めており、開発からデプロイまでの一連のワークフローを実践した。
 
 本ドキュメントは環境構築からデプロイまでの簡単な手順を示しているが、Jenkinsの設定などCI環境の構築手順については触れていない。<br>
-また、デプロイフローは[3.5. 開発プロジェクトのビルド - TERASOLUNA Server Framework for Java (5.x) Development Guideline](https://terasolunaorg.github.io/guideline/current/ja/ImplementationAtEachLayer/CreateProject.html#createwebapplicationprojectbuilddeploycontinueddeployment)を参考としているが、現時点でこのフローを自動化するには至っていない。今後の課題として取り組みたい。
 
 ## 技術スタック
 <img alt="my skills" src="https://skillicons.dev/icons?theme=light&perline=8&i=java,spring,idea,maven,jenkins,docker,postgres" />
@@ -84,8 +83,38 @@ mvn clean package -Pstaging
 mvn clean package -Pproduction
 ```
 
-## デプロイ方法
-warファイルのデプロイ先は、Tomcatコンテナのwebappsであるが、以下のフォルダにマウントしているため配置することでデプロイ可能。
+## デプロイ手順
+
+> [!NOTE]
+> デプロイ手順は[3.5. 開発プロジェクトのビルド - TERASOLUNA Server Framework for Java (5.x) Development Guideline](https://terasolunaorg.github.io/guideline/current/ja/ImplementationAtEachLayer/CreateProject.html#createwebapplicationprojectbuilddeploycontinueddeployment)を参考としている。検証環境と本番環境でフローは異なるが、大きく分けて以下のフローをたどる。
+> 1. パッケージリポジトリ（Nexus）へのアップロード
+> 2. パッケージリポジトリから対象のアーティファクト（warファイル）を取得し、APサーバ（Tomcat）にデプロイ
+
+### 1. パッケージリポジトリ（Nexus）へのアップロード
+#### 検証環境の場合
+①warファイルをNexusのsnapshotリポジトリへアップロード
+```
+mvn clean deploy -Pstaging
+```
+
+#### 本番環境の場合
+①[maven-release-plugin](https://maven.apache.org/maven-release/maven-release-plugin/index.html)を使用し、pom.xmlの`<version>`タグの更新とtag付けを行う
+```
+mvn release:prepare
+```
+
+②[maven-release-plugin](https://maven.apache.org/maven-release/maven-release-plugin/index.html)を使用し、Nexusのreleaseリポジトリへアップロード
+```
+mvn release:perform
+```
+
+> [!IMPORTANT]
+> ※本コマンドを実行し、Nexusへアップロードするには、ローカルリポジトリである`.m2`フォルダ内にsettings.xmlを作成し設定を行う必要がある。<br>
+> ※`mvn release:perform`を使用すると`deploy`と`site-deploy`がゴールとして実行される。deploy時のwarファイルはproduction用のプロファイルを指定してビルドする必要がある。
+
+
+### 2. APサーバ（Tomcat）にデプロイ
+warファイルのデプロイ先はTomcatコンテナのwebappsであるが、以下のフォルダにマウントしているため配置することでデプロイ可能。
 
 ```
 docker
@@ -98,4 +127,8 @@ docker
 - 検証環境確認URL：http://localhost:8091/todo/
 - 本番環境確認URL：http://localhost:8092/todo/
 
-
+> [!NOTE]
+> warファイルをNexusから自動で取得する場合はREST APIを使用するとよい。Nexusの[公式ドキュメント]([https://help.sonatype.com/en/search-api.html#SearchAPI-DownloadingtheLatestVersionofanAsset](https://help.sonatype.com/en/search-api.html#SearchAPI-DownloadingtheLatestVersionofanAsset))にsnapshot版リポジトリの最新版を取得するcurlコマンドが紹介されている。
+> ```
+> curl -L -X GET "http://localhost:8191/service/rest/v1/search/assets/download?sort=version&repository=maven-snapshots&maven.groupId=com.example&maven.artifactId=todo&maven.extension=war" -H "accept: application/json" --output "todo.war"
+> ```
