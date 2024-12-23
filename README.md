@@ -91,6 +91,11 @@ mvn clean package -Pproduction
 > 2. パッケージリポジトリから対象のアーティファクト（warファイル）を取得し、APサーバ（Tomcat）にデプロイ
 
 ### 1. パッケージリポジトリ（Nexus）へのアップロード
+
+環境ごとのアップロード先は以下となる。
+- 検証環境：snapshotリポジトリ
+- 本番環境：releaseリポジトリ
+
 #### 検証環境の場合
 ①warファイルをNexusのsnapshotリポジトリへアップロード
 ```
@@ -98,19 +103,22 @@ mvn clean deploy -Pstaging
 ```
 
 #### 本番環境の場合
-①[maven-release-plugin](https://maven.apache.org/maven-release/maven-release-plugin/index.html)を使用し、pom.xmlの`<version>`タグの更新とtag付けを行う
+> [!Tip]
+> TERESOLUNAのドキュメントに記載されているが、releaseリポジトリの場合、同じバージョンのアーティファクトは1度しか上げれない。そのため、[maven-release-plugin](https://maven.apache.org/maven-release/maven-release-plugin/index.html)を使用してバージョニングとタグ付けなどを行っている。
+
+①maven-release-pluginを使用し、pom.xmlの`<version>`タグの更新とtag付けを行う
 ```
 mvn release:prepare
 ```
 
-②[maven-release-plugin](https://maven.apache.org/maven-release/maven-release-plugin/index.html)を使用し、Nexusのreleaseリポジトリへアップロード
+②maven-release-pluginを使用し、Nexusのreleaseリポジトリへアップロード
 ```
 mvn release:perform
 ```
 
 > [!IMPORTANT]
-> ※本コマンドを実行し、Nexusへアップロードするには、ローカルリポジトリである`.m2`フォルダ内にsettings.xmlを作成し設定を行う必要がある。<br>
-> ※`mvn release:perform`を使用すると`deploy`と`site-deploy`がゴールとして実行される。deploy時のwarファイルはproduction用のプロファイルを指定してビルドする必要がある。
+> - deployゴールでNexusへアップロードするには、ローカルリポジトリである`.m2`フォルダ内にsettings.xmlを作成し設定を行う必要がある。<br>
+> - `mvn release:perform`を使用すると`deploy`と`site-deploy`がゴールとして実行される。deploy時のwarファイルはproduction用のプロファイルを指定してビルドする必要がある。
 
 
 ### 2. APサーバ（Tomcat）にデプロイ
@@ -127,8 +135,8 @@ docker
 - 検証環境確認URL：http://localhost:8091/todo/
 - 本番環境確認URL：http://localhost:8092/todo/
 
-> [!NOTE]
-> warファイルをNexusから自動で取得する場合はREST APIを使用するとよい。Nexusの[公式ドキュメント]([https://help.sonatype.com/en/search-api.html#SearchAPI-DownloadingtheLatestVersionofanAsset](https://help.sonatype.com/en/search-api.html#SearchAPI-DownloadingtheLatestVersionofanAsset))にsnapshot版リポジトリの最新版を取得するcurlコマンドが紹介されている。
+> [!Tip]
+> warファイルをNexusから自動で取得する場合はREST APIを使用するとよい。Nexusの[公式ドキュメント](https://help.sonatype.com/en/search-api.html#downloading-the-latest-version-of-an-asset)にsnapshot版リポジトリの最新版を取得するcurlコマンドが紹介されている。本アプリケーションで使用する場合の例は以下。
 > ```
 > curl -L -X GET "http://localhost:8191/service/rest/v1/search/assets/download?sort=version&repository=maven-snapshots&maven.groupId=com.example&maven.artifactId=todo&maven.extension=war" -H "accept: application/json" --output "todo.war"
 > ```
