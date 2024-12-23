@@ -35,3 +35,7 @@ build/
 ### Docker ###
 /docker/production-env/production_webapps
 /docker/staging-env/staging_webapps
+
+### maven-release-plugin ###
+pom.xml.releaseBackup
+release.properties
