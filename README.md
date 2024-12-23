@@ -80,3 +80,19 @@ mvn clean package -Pstaging
 ```
 mvn clean package -Pproduction
 ```
+
+## デプロイ方法
+warファイルのデプロイ先は、Tomcatコンテナのwebappsであるが、以下のフォルダにマウントしているため配置することでデプロイ可能。
+
+```
+docker
+  ├── staging-env
+  │   └── production_webapps
+  └── production-env
+      └── staging_webapps
+```
+
+- 検証環境確認URL：http://localhost:8091/todo/
+- 本番環境確認URL：http://localhost:8092/todo/
+
+
